@@ -1,5 +1,6 @@
 # 🔟 Phase 10 Score Tracker
 
+
 A simple, mobile-friendly web app to keep score for the card game **Phase 10**.
 Add players, and after each round enter how many points each player has left in
 hand and whether they completed their phase. The app tracks cumulative scores,

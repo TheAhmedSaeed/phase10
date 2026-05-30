@@ -135,6 +135,18 @@ th, td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--b
 th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
 th.left, td.left { text-align: left; }
 .p-name { font-weight: 600; }
+.name-wrap { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+td.p-name .remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+td.p-name .remove:hover { color: #f87171; }
 .p-total { font-weight: 700; font-size: 1.05rem; }
 .p-phase .badge {
   display: inline-block;

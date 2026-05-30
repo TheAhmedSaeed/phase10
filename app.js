@@ -140,10 +140,21 @@ function renderGame() {
     const tr = document.createElement("tr");
     if (p.score === lowest) tr.classList.add("row-leader");
 
-    // Name
+    // Name (with in-game remove button)
     const nameTd = document.createElement("td");
     nameTd.className = "left p-name";
-    nameTd.textContent = p.name;
+    const nameWrap = document.createElement("div");
+    nameWrap.className = "name-wrap";
+    const nameText = document.createElement("span");
+    nameText.textContent = p.name;
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove";
+    removeBtn.type = "button";
+    removeBtn.setAttribute("aria-label", `Remove ${p.name}`);
+    removeBtn.textContent = "✕";
+    removeBtn.onclick = () => removePlayer(p.id);
+    nameWrap.append(nameText, removeBtn);
+    nameTd.appendChild(nameWrap);
 
     // Phase
     const phaseTd = document.createElement("td");
@@ -233,6 +244,24 @@ function submitRound() {
 
   state.history.push(roundEntry);
   saveState();
+  renderGame();
+}
+
+function removePlayer(id) {
+  const player = state.players.find((p) => p.id === id);
+  if (!player) return;
+  if (!confirm(`Remove ${player.name} from the game? Their scores will be deleted.`)) return;
+  state.players = state.players.filter((p) => p.id !== id);
+  // Drop their entries from saved rounds so undo stays consistent.
+  state.history.forEach((round) => delete round[id]);
+  saveState();
+  if (state.players.length === 0) {
+    // No one left — go back to setup so a fresh game can be started.
+    state.started = false;
+    saveState();
+    showSetup();
+    return;
+  }
   renderGame();
 }
 

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#5b21b6" />
+  <title>Phase 10 Score Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔟</text></svg>" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>🔟 Phase 10 Score Tracker</h1>
+    <p class="tagline">Lowest score wins • First to finish Phase 10 takes the game</p>
+  </header>
+
+  <main>
+    <!-- ============ SETUP SCREEN ============ -->
+    <section id="setup" class="card">
+      <h2>Players</h2>
+      <form id="add-player-form" class="row">
+        <input id="player-name" type="text" placeholder="Enter player name" autocomplete="off" maxlength="20" />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+      <ul id="player-list" class="player-list"></ul>
+      <p id="setup-hint" class="hint">Add at least 2 players to start.</p>
+      <button id="start-game" class="btn btn-success btn-block" disabled>Start Game</button>
+    </section>
+
+    <!-- ============ GAME SCREEN ============ -->
+    <section id="game" class="card hidden">
+      <div class="game-top">
+        <h2>Round <span id="round-num">1</span></h2>
+        <div class="game-actions">
+          <button id="undo-round" class="btn btn-ghost" disabled>Undo last round</button>
+          <button id="new-game" class="btn btn-ghost">New game</button>
+        </div>
+      </div>
+
+      <div id="winner-banner" class="winner-banner hidden"></div>
+
+      <div class="table-wrap">
+        <table id="scoreboard">
+          <thead>
+            <tr>
+              <th class="left">Player</th>
+              <th>Phase</th>
+              <th>Total</th>
+              <th id="round-header">This round</th>
+            </tr>
+          </thead>
+          <tbody id="scoreboard-body"></tbody>
+        </table>
+      </div>
+
+      <p class="hint round-hint">
+        Enter each player's leftover-card points for the round, and tick
+        <strong>Done</strong> if they completed their phase (they advance to the next one).
+      </p>
+      <button id="submit-round" class="btn btn-primary btn-block">Save Round &amp; Continue</button>
+    </section>
+
+    <!-- ============ PHASE REFERENCE ============ -->
+    <section class="card">
+      <details>
+        <summary>📋 Phase reference &amp; scoring</summary>
+        <ol id="phase-reference" class="phase-reference"></ol>
+        <h3>Card values (points for cards left in hand)</h3>
+        <ul class="scoring-ref">
+          <li>Number cards <strong>1–9</strong> → 5 points each</li>
+          <li>Number cards <strong>10–12</strong> → 10 points each</li>
+          <li><strong>Skip</strong> → 15 points each</li>
+          <li><strong>Wild</strong> → 25 points each</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Scores save automatically in your browser.</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
